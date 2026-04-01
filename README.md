@@ -135,14 +135,6 @@ cat plugins/ralph-wiggum/.claude-plugin/plugin.json
 
 ---
 
-## ⭐ Stars History
-
-感谢每一位给这个项目 Star 的朋友！
-
-[![Star History Chart](https://api.star-history.com/svg?repos=LING71671/Open-ClaudeCode&type=Date)](https://star-history.com/#LING71671/Open-ClaudeCode&Date)
-
----
-
 ## 🔗 相关链接
 
 - [Anthropic 官网](https://www.anthropic.com/)
