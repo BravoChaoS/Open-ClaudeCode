@@ -89,6 +89,7 @@ Open-ClaudeCode/
 - **API Key** (choose one):
   - 🔵 **Anthropic Official API** — Register at [console.anthropic.com](https://console.anthropic.com/) to get API Key
   - 🟢 **Third-party Proxy** — Recommended for users in certain regions, get proxy URL and API Key
+  > ⚠️ **OpenAI format proxies** (e.g., MiniMax, OpenRouter) require [Universal-AI-Protocol-Bridge](https://github.com/LING71671/Universal-AI-Protocol-Bridge) for protocol conversion
   - 🔴 **Claude Subscription** — Login via OAuth after running (requires network access)
 
 ### Step 1: Clone and Run
@@ -427,6 +428,37 @@ A: Yes! But it's recommended to run in your project directory so Claude can acce
 
 ### Q: What's the difference from npm installation?
 A: This repository provides complete source code recovered from the npm package, suitable for learning and research. Functionally identical to the npm-installed version.
+
+### Q: Does it support OpenAI format APIs?
+A: Claude Code natively uses Anthropic API format. If you need to use OpenAI SDK format, you can use **[Universal-AI-Protocol-Bridge](https://github.com/LING71671/Universal-AI-Protocol-Bridge)** for protocol conversion:
+
+**Features:**
+- 🔄 **Protocol Conversion** - Convert OpenAI SDK format to Anthropic/Claude API format
+- 🌐 **Multi-Protocol Support** - OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure, Ollama, etc.
+- ⚡ **Streaming Optimization** - Full support for SSE/NDJSON streaming responses
+- 🔐 **Secure Encryption** - AES-GCM encryption to protect API keys
+- ☁️ **Cloudflare Workers** - Edge deployment with global low latency
+
+**Usage:**
+1. Visit the [online test URL](https://apibridge.071.cc.cd/) or self-deploy
+2. Select target protocol (e.g., Anthropic) and enter your API key
+3. Generate proxy URL, then point your OpenAI SDK `baseURL` to this address
+
+```javascript
+// Example: Using OpenAI SDK to call Claude
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  baseURL: 'https://your-bridge-url/proxy/{token}/v1',
+  apiKey: 'any-key'  // Actual key is encrypted in the token
+});
+
+// Now you can call Claude using OpenAI format!
+const response = await client.chat.completions.create({
+  model: 'claude-3-5-sonnet-latest',
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+```
 
 ---
 
